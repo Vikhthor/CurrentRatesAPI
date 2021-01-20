@@ -38,10 +38,16 @@ router.get('/rates', async (req, res, next) => {
           }
           return rates[cur] = data.rates[cur];
         });
+        const dateObj = new Date();
+        const month = dateObj.getMonth() + 1;
+        const day = dateObj.getDate();
+        const year = dateObj.getFullYear();
+        const date = year + '-' + month + '-' + day;
+
         const fxRates = {
           results: {
             base,
-            date: new Date(),
+            date,
             rates
           },
         }
