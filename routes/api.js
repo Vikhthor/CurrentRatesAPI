@@ -32,6 +32,10 @@ router.get('/rates', async (req, res, next) => {
           res.status(404).json(data);
         }
         await currencies.map((cur) => {
+          if(typeof data.rates[cur] == 'undefined'){
+            res.status(404).json({error: cur + ' is currently not supported'});
+            return;
+          }
           return rates[cur] = data.rates[cur];
         });
         const fxRates = {
